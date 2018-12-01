@@ -69,5 +69,5 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	gfx.DrawTextBox(box);
-	//gfx.DrawLetter(letter, surf);
+	//jæja aðeins að læra á þetta git dæmi, branch siggi
 }
