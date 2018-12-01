@@ -59,7 +59,7 @@ public:
 	}
 	void PutPixel( int x, int y, Color c );
 	void DrawSprite(int x, int y, const Surface& s);
-	void DrawLetter(int cursorPos, int bitmapPos, int width, const TextBox& s);
+	void DrawLetter(Text::Character c,int renderPos, const TextBox& s);
 	void DrawTextBox(TextBox& t);
 	void DrawRect( int x0, int y0, int x1, int y1, Color c );
 	void DrawLine(int x, int y0, int y1, Color c);

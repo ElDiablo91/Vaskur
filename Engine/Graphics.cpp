@@ -327,13 +327,14 @@ void Graphics::DrawSprite(int x, int y, const Surface & s)
 	}
 }
 
-void Graphics::DrawLetter(int cursorPos, int bitmapPos, int wiidth, const TextBox& box)
+void Graphics::DrawLetter(Text::Character c,int renderPos, const TextBox& box)
 {
-	int yOffset = (bitmapPos / box.FontBOS->fontBitmap->GetWidth()) * 23;
-	int xOffset = bitmapPos % box.FontBOS->fontBitmap->GetWidth();
+	int yOffset = (c.bitmapPos / box.FontBOS->fontBitmap->GetWidth()) * 23;
+	int xOffset = c.bitmapPos % box.FontBOS->fontBitmap->GetWidth();
+	//þarf að hald utan um cursorpos í clasanum til að geta teiknað curosorinn
 	for (int sy = box.y; sy < box.y + 23; sy++)
 	{	
-		for (int sx = cursorPos, tempX = xOffset; sx < cursorPos + wiidth; sx++, tempX++)
+		for (int sx = renderPos, tempX = xOffset; sx < renderPos + c.width; sx++, tempX++)
 		{
 			Color pixel = box.FontBOS->fontBitmap->GetPixel(tempX, yOffset);
 			if (pixel != Colors::White)
@@ -354,17 +355,19 @@ void Graphics::DrawTextBox(TextBox& t)
 
 	DrawRect(x0, y0, x1, y1, Colors::White);
 
-	for each (std::pair<Text::Character, int> i in t.input)
+	int renderPos = t.x;
+	for each (Text::Character i in t.input)
 	{
-		DrawLetter(i.second, i.first.bitmapPos, i.first.width, t);
+		renderPos += i.leftPadding;
+		DrawLetter(i, renderPos, t);
+		renderPos += i.width + i.rightPadding;
 	}
 
 	if (t.isSelected && blinker > 30)
 	{
 
-		DrawLine(t.cursorPos + 2, y0, y1, Colors::Black);
-		DrawLine(t.cursorPos + 3, y0, y1, Colors::Black);
-		DrawLine(t.cursorPos + 4, y0, y1, Colors::Black);
+		DrawLine(t.cursorPos 	, y0 + 3, y1 - 3, Colors::Black);
+		DrawLine(t.cursorPos + 1, y0 + 3, y1 - 3, Colors::Black);
 		if(blinker > 60)
 		{
 			blinker = 0;

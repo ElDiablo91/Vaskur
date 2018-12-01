@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include <string>
 
 Game::Game( MainWindow& wnd )
 	:
@@ -44,7 +45,24 @@ void Game::UpdateModel()
 	}
 	if (!wnd.kbd.CharIsEmpty())
 	{
-		box.Input(wnd.kbd.ReadChar());
+		char k = wnd.kbd.ReadChar();
+		box.Input(k);
+
+		std::string x(1, k);
+		OutputDebugStringA(x.c_str());
+
+		box.UpdateCursorPos();
+	}
+	const auto e = wnd.kbd.ReadKey();
+	if (e.GetCode() == VK_LEFT && e.IsPress())
+	{
+		box.StepCursorLeft();
+		box.UpdateCursorPos();
+	}
+	if (e.GetCode() == VK_RIGHT && e.IsPress())
+	{
+		box.StepCursorRight();
+		box.UpdateCursorPos();
 	}
 }
 
