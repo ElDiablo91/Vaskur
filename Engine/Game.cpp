@@ -42,6 +42,7 @@ void Game::UpdateModel()
 	if (wnd.mouse.LeftIsPressed())
 	{
 		box.CheckForCursor(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
+		box.UpdateCursorPos();
 	}
 	if (!wnd.kbd.CharIsEmpty())
 	{

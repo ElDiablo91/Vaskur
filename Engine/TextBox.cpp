@@ -17,11 +17,29 @@ TextBox::~TextBox()
 
 void TextBox::CheckForCursor(int mx, int my)
 {
+	int renderPos = x;
 	int y1 = y + height;
 	int x1 = x + width;
 	if (my > y && my < y1 && mx > x && mx < x1)
 	{
 		isSelected = true;
+		for(auto i = input.begin(); i != input.end(); i++)
+		{
+			int w = i->leftPadding + i->width + i->rightPadding;
+			int halfW = renderPos + (w >> 1);
+			int nextHalfW = halfW + w;
+			if (mx > halfW && mx < nextHalfW)
+			{
+				inputPos = i;
+				break;
+			}
+			else
+			{
+				inputPos = input.end();
+				inputPos--;
+			}
+			renderPos += w;
+		}
 	}
 	else
 	{
