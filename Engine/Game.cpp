@@ -71,4 +71,5 @@ void Game::ComposeFrame()
 {
 	gfx.DrawTextBox(box);
 	//gfx.DrawLetter(letter, surf);
+	//prufa að committa á master aftur
 }
