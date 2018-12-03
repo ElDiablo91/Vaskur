@@ -399,6 +399,10 @@ void TextBox::Input(char keycode)
 				break;
 			}
 			inputPos--;
+			if (InputWidth() > width)
+			{
+				input.erase(inputPos--);
+			}
 		}
 	}
 }
@@ -432,6 +436,18 @@ void TextBox::UpdateCursorPos()
 	temp += i->leftPadding + i->width + i->rightPadding;
 
 	cursorPos = temp + x;
+}
+
+int TextBox::InputWidth()
+{
+	int w = 0;
+	
+	for each (auto i in input)
+	{
+		w += i.leftPadding + i.width + i.rightPadding;
+	}
+		
+	return w;
 }
 
 

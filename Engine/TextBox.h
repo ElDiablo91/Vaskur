@@ -13,6 +13,7 @@ public:
 	void StepCursorLeft();
 	void StepCursorRight();
 	void UpdateCursorPos();
+	int InputWidth();
 
 	const int x = 100;
 	const int y = 100;
