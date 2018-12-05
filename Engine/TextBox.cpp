@@ -53,7 +53,7 @@ void TextBox::Input(char keycode)
 	{
 		if (keycode == 0x08)
 		{
-			if (input.size() > 1)
+			if (inputPos->charValue != '\0')
 			{
 				input.erase(inputPos--);
 			}
@@ -396,10 +396,11 @@ void TextBox::Input(char keycode)
 				input.insert(++inputPos ,Text::NINE);
 				break;
 			default:
+				inputPos++;
 				break;
 			}
 			inputPos--;
-			if (InputWidth() > width)
+			if (InputWidth() > width-2)
 			{
 				input.erase(inputPos--);
 			}
@@ -409,7 +410,7 @@ void TextBox::Input(char keycode)
 
 void TextBox::StepCursorLeft()
 {
-	if (input.size() > 1)
+	if (inputPos->charValue != '\0')
 	{
 		inputPos--;
 	}

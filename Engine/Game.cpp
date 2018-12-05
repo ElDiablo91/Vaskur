@@ -70,6 +70,4 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	gfx.DrawTextBox(box);
-	//gfx.DrawLetter(letter, surf);
-	//just in case we fuck up
 }

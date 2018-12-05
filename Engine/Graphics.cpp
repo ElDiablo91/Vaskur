@@ -304,7 +304,7 @@ void Graphics::EndFrame()
 void Graphics::BeginFrame()
 {
 	// clear the sysbuffer
-	memset( pSysBuffer,0u,sizeof( Color ) * Graphics::ScreenHeight * Graphics::ScreenWidth );
+	memset( pSysBuffer,Colors::Gray.dword,sizeof( Color ) * Graphics::ScreenHeight * Graphics::ScreenWidth );
 }
 
 void Graphics::PutPixel( int x,int y,Color c )
@@ -354,6 +354,7 @@ void Graphics::DrawTextBox(TextBox& t)
 	int y1 = t.y + t.height;
 
 	DrawRect(x0, y0, x1, y1, Colors::White);
+	DrawLineRect(x0-1, y0-1, x1+1, y1+1, Colors::Black);
 
 	int renderPos = t.x;
 	for each (Text::Character i in t.input)
@@ -366,8 +367,8 @@ void Graphics::DrawTextBox(TextBox& t)
 	if (t.isSelected && blinker > 30)
 	{
 
-		DrawLine(t.cursorPos 	, y0 + 3, y1 - 3, Colors::Black);
-		DrawLine(t.cursorPos + 1, y0 + 3, y1 - 3, Colors::Black);
+		DrawLineV(t.cursorPos 	, y0 + 3, y1 - 3, Colors::Black);
+		DrawLineV(t.cursorPos + 1, y0 + 3, y1 - 3, Colors::Black);
 		if(blinker > 60)
 		{
 			blinker = 0;
@@ -399,12 +400,28 @@ void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 	}
 }
 
-void Graphics::DrawLine(int x, int y0, int y1, Color c)
+void Graphics::DrawLineV(int x, int y0, int y1, Color c)
 {
 	for(int i = y0; i < y1; i++)
 	{
 		PutPixel(x, i, c);
 	}
+}
+
+void Graphics::DrawLineH(int y, int x0, int x1, Color c)
+{
+	for (int i = x0; i < x1; i++)
+	{
+		PutPixel(i, y, c);
+	}
+}
+
+void Graphics::DrawLineRect(int x0, int y0, int x1, int y1, Color c)
+{
+	DrawLineV(x0, y0, y1, c);
+	DrawLineV(x1, y0, y1, c);
+	DrawLineH(y0, x0, x1, c);
+	DrawLineH(y1, x0, x1, c);
 }
 
 

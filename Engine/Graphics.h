@@ -62,7 +62,9 @@ public:
 	void DrawLetter(Text::Character c,int renderPos, const TextBox& s);
 	void DrawTextBox(TextBox& t);
 	void DrawRect( int x0, int y0, int x1, int y1, Color c );
-	void DrawLine(int x, int y0, int y1, Color c);
+	void DrawLineV(int x, int y0, int y1, Color c);
+	void DrawLineH(int y, int x0, int x1, Color c);
+	void DrawLineRect(int x0, int y0, int x1, int y1, Color c);
 	void DrawRectDim( int x0, int y0, int width, int height, Color c )
 	{
 		DrawRect( x0,y0,x0 + width,y0 + height,c );
