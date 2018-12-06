@@ -316,69 +316,16 @@ void Graphics::PutPixel( int x,int y,Color c )
 	pSysBuffer[Graphics::ScreenWidth * y + x] = c;
 }
 
-void Graphics::DrawSprite(int x, int y, const Surface & s)
-{
-	for (int sy = 0; sy < s.GetHeight(); sy++)
-	{
-		for (int sx = 0; sx < s.GetWidth(); sx++)
-		{
-			PutPixel(x + sx, y + sy, s.GetPixel(sx, sy)); 
-		}
-	}
-}
-
-void Graphics::DrawLetter(Text::Character c,int renderPos, const TextBox& box)
-{
-	int yOffset = (c.bitmapPos / box.FontBOS->fontBitmap->GetWidth()) * 23;
-	int xOffset = c.bitmapPos % box.FontBOS->fontBitmap->GetWidth();
-	//þarf að hald utan um cursorpos í clasanum til að geta teiknað curosorinn
-	for (int sy = box.y; sy < box.y + 23; sy++)
-	{	
-		for (int sx = renderPos, tempX = xOffset; sx < renderPos + c.width; sx++, tempX++)
-		{
-			Color pixel = box.FontBOS->fontBitmap->GetPixel(tempX, yOffset);
-			if (pixel != Colors::White)
-			{
-				PutPixel(sx, sy, pixel);
-			}
-		}
-		yOffset++;
-	}
-}
-
-void Graphics::DrawTextBox(TextBox& t)
-{
-	int x0 = t.x;
-	int x1 = t.x + t.width;
-	int y0 = t.y;
-	int y1 = t.y + t.height;
-
-	DrawRect(x0, y0, x1, y1, Colors::White);
-	DrawLineRect(x0-1, y0-1, x1+1, y1+1, Colors::Black);
-
-	int renderPos = t.x;
-	for each (Text::Character i in t.input)
-	{
-		renderPos += i.leftPadding;
-		DrawLetter(i, renderPos, t);
-		renderPos += i.width + i.rightPadding;
-	}
-
-	if (t.isSelected && blinker > 30)
-	{
-
-		DrawLineV(t.cursorPos 	, y0 + 3, y1 - 3, Colors::Black);
-		DrawLineV(t.cursorPos + 1, y0 + 3, y1 - 3, Colors::Black);
-		if(blinker > 60)
-		{
-			blinker = 0;
-		}
-	}
-	if (t.isSelected)
-	{
-		blinker++;
-	}
-}
+//void Graphics::DrawSprite(int x, int y, const Surface & s)
+//{
+//	for (int sy = 0; sy < s.GetHeight(); sy++)
+//	{
+//		for (int sx = 0; sx < s.GetWidth(); sx++)
+//		{
+//			PutPixel(x + sx, y + sy, s.GetPixel(sx, sy)); 
+//		}
+//	}
+//}
 
 void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 {

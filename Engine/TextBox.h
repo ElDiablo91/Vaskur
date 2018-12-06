@@ -1,27 +1,27 @@
 #pragma once
-#include "Text.h"
+#include "Element.h"
 #include <list>
 
-class TextBox
+class TextBox : public Element
 {
 public:
 	TextBox();
+	TextBox(int x, int y, int width, int height);
 	~TextBox();
 
-	void CheckForCursor(int x, int y);
-	void Input(char keycode);
-	void StepCursorLeft();
-	void StepCursorRight();
-	void UpdateCursorPos();
+	void Draw(Graphics& gfx) override;
+
+	virtual void Input(char keycode);
+	virtual void CheckForCursor(int x, int y);
+	virtual void StepCursorLeft();
+	virtual void StepCursorRight();
+	virtual void UpdateCursorPos();
+	virtual bool IsSelected() { return isSelected; }
 	int InputWidth();
 
-	const int x = 100;
-	const int y = 100;
-	const int width = 200;
-	const int height = 24;
-	bool isSelected = false;
+
 	int cursorPos;
-	Text *FontBOS;
+	int blinker;
 	std::list<Text::Character> input;
 	std::list<Text::Character>::iterator inputPos;
 };

@@ -22,6 +22,9 @@
 #include "Game.h"
 #include "ChiliException.h"
 
+//fucking static object drasl
+Text Element::FontBOS;
+
 int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR pArgs,INT )
 {
 	try

@@ -25,7 +25,10 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	box(100,100,300,24),
+	cBox(100,200,300,24),
+	eList({&box, &cBox})
 {
 }
 
@@ -39,35 +42,46 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.mouse.LeftIsPressed())
+	//ekki láta element erfa Text???
+	//
+	for each (auto element in eList)
 	{
-		box.CheckForCursor(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
-		box.UpdateCursorPos();
-	}
-	if (!wnd.kbd.CharIsEmpty())
-	{
-		char k = wnd.kbd.ReadChar();
-		box.Input(k);
+		
+		if (wnd.mouse.LeftIsPressed())
+		{
+			element->CheckForCursor(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
+			element->UpdateCursorPos();
+		}
 
-		std::string x(1, k);
-		OutputDebugStringA(x.c_str());
+		if (element->IsSelected())
+		{
+			if (!wnd.kbd.CharIsEmpty())
+			{
+				char k = wnd.kbd.ReadChar();
+				element->Input(k);
 
-		box.UpdateCursorPos();
-	}
-	const auto e = wnd.kbd.ReadKey();
-	if (e.GetCode() == VK_LEFT && e.IsPress())
-	{
-		box.StepCursorLeft();
-		box.UpdateCursorPos();
-	}
-	if (e.GetCode() == VK_RIGHT && e.IsPress())
-	{
-		box.StepCursorRight();
-		box.UpdateCursorPos();
+				std::string x(1, k);
+				OutputDebugStringA(x.c_str());
+
+				element->UpdateCursorPos();
+			}
+			const auto e = wnd.kbd.ReadKey();
+			if (e.GetCode() == VK_LEFT && e.IsPress())
+			{
+				element->StepCursorLeft();
+				element->UpdateCursorPos();
+			}
+			if (e.GetCode() == VK_RIGHT && e.IsPress())
+			{
+				element->StepCursorRight();
+				element->UpdateCursorPos();
+			}
+		}
 	}
 }
 
 void Game::ComposeFrame()
 {
-	gfx.DrawTextBox(box);
+	box.Draw(gfx);
+	cBox.Draw(gfx);
 }

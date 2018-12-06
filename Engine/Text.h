@@ -1,15 +1,16 @@
 #pragma once
-#include <string>
 #include "Surface.h"
+
 
 class Text
 {
 public:
-	Text(const std::string filename);
+	Text();
 	~Text();
 
-	Surface *fontBitmap;
 public:
+	Surface *fontBitmap = new Surface("Font_bookman_old_style.bmp");
+
 	class Character
 	{
 	public:
@@ -133,7 +134,6 @@ public:
 	constexpr static Character EIGHT			{ 2668 + 5,		'8',	 8,		14,		0,	0};
 	constexpr static Character NINE				{ 2691 + 5,		'9',	 9,		13,		0,	0};
 };		
-
 
 		
 		
