@@ -8,5 +8,11 @@ public:
 	ComboBox(int x, int y, int width, int height);
 	~ComboBox();
 	
-	void Draw(Graphics& gfx) override;
+	void Input(char keycode);
+	void Draw(Graphics& gfx);
+private:
+	int arrowDownX;
+	int arrowDownY;
+	int arrowDownWidth;
+	int arrowDownHeight;
 };
