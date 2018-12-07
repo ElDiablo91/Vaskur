@@ -1,16 +1,12 @@
 #pragma once
 #include "Surface.h"
+#include <list>
+#include <map>
 
 
 class Text
 {
 public:
-	Text();
-	~Text();
-
-public:
-	Surface *fontBitmap = new Surface("Font_bookman_old_style.bmp");
-
 	class Character
 	{
 	public:
@@ -21,6 +17,15 @@ public:
 		int leftPadding;
 		int rightPadding;
 	};
+public:
+	Text();
+	~Text();
+
+	std::list<Character> StringToTextList(std::string& s);
+public:
+	std::map<char, Text::Character> charMap;
+	Surface *fontBitmap = new Surface("Font_bookman_old_style.bmp");
+
 	constexpr static Character START			{ 0,			'\0',	 0,		0 ,		0,	1};
 	constexpr static Character SPACE			{ 0,			' ',	 0,		5 ,		0,	0};
 	constexpr static Character EXCLAMATION		{ 23 + 6,		'!',	 0,		9 ,		0,	0};

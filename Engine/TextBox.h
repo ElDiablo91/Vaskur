@@ -1,6 +1,5 @@
 #pragma once
 #include "Element.h"
-#include <list>
 
 class TextBox : public Element
 {

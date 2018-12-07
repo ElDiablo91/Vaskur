@@ -10,7 +10,8 @@ ComboBox::ComboBox(int x, int y, int width, int height)
 	arrowDownX(x+width-16),
 	arrowDownY(y),
 	arrowDownWidth(16),
-	arrowDownHeight(height)
+	arrowDownHeight(height),
+	isDropDown(false)
 {
 	
 }
@@ -40,5 +41,28 @@ void ComboBox::Draw(Graphics & gfx)
 		gfx.DrawLineH(arrowDownY + 8 + i++, x0++, x1--, Colors::Black);
 		gfx.DrawLineH(arrowDownY + 8 + i,   x0,   x1  , Colors::Black);
 	}
+
+	if (isDropDown)
+	{
+		gfx.DrawRectDim(x, y + height, width + arrowDownWidth, 200, Colors::White);
+	}
 }
+
+void ComboBox::CheckForCursor(int mx, int my)
+{
+	TextBox::CheckForCursor(mx, my);
+
+	int y1 = arrowDownY + arrowDownHeight;
+	int x1 = arrowDownX + arrowDownWidth;
+
+	if (my > arrowDownY && my < y1 && mx > arrowDownX && mx < x1)
+	{
+		isDropDown = true;
+	}
+	else
+	{
+		isDropDown = false;
+	}
+}
+
 
