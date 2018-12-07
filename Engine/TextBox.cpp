@@ -79,8 +79,8 @@ void TextBox::CheckForCursor(int mx, int my)
 		for (auto i = input.begin(); i != input.end(); i++)
 		{
 			int w = i->leftPadding + i->width + i->rightPadding;
-			int halfW = renderPos + (w >> 1);
-			int nextHalfW = halfW + w;
+			int halfW = renderPos + (w >> 1) -2;
+			int nextHalfW = halfW + w + 2;
 			if (mx > halfW && mx < nextHalfW)
 			{
 				inputPos = i;

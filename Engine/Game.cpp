@@ -78,10 +78,15 @@ void Game::UpdateModel()
 			}
 		}
 	}
+	//ef ekkert er selectað þá hendum við öllu inputti sem 
+	//kemur af lyklaborðinu
+	wnd.kbd.Flush();
 }
 
 void Game::ComposeFrame()
 {
-	box.Draw(gfx);
-	cBox.Draw(gfx);
+	for each(auto element in eList)
+	{
+		element->Draw(gfx);
+	}
 }
