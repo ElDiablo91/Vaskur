@@ -30,6 +30,9 @@ Game::Game( MainWindow& wnd )
 	cBox(100,200,300,24),
 	eList({&box, &cBox})
 {
+	std::list<Font::Character> temp = box.FontBOS.StringToTextList("yolo");
+	box.input.insert(++box.inputPos, temp.begin(), temp.end());
+	box.inputPos--;
 }
 
 void Game::Go()

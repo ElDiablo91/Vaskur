@@ -149,7 +149,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Surface.h" />
-    <ClInclude Include="Text.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="TextBox.h" />
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +163,7 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Surface.cpp" />
-    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>

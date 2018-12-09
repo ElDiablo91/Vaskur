@@ -1,6 +1,6 @@
-#include "Text.h"
+#include "Font.h"
 
-Text::Text()
+Font::Font()
 {
 	charMap['\0'] = START;
 	charMap[' ' ] = SPACE;
@@ -116,12 +116,17 @@ Text::Text()
 	charMap['9' ] = NINE;
 }
 
-Text::~Text()
+Font::~Font()
 {
 }
 
-std::list<Text::Character> Text::StringToTextList(std::string & s)
+std::list<Font::Character> Font::StringToTextList(std::string s)
 {
-
-	return std::list<Text::Character>();
+	std::list<Font::Character> temp;
+	temp.push_back(charMap['\0']);
+	for (int i = 0; i < s.size(); i++)
+	{
+		temp.push_back(charMap[s[i]]);
+	}
+	return temp;
 }

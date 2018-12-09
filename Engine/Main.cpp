@@ -23,7 +23,7 @@
 #include "ChiliException.h"
 
 //fucking static object drasl
-Text Element::FontBOS;
+Font Element::FontBOS;
 
 int WINAPI wWinMain( HINSTANCE hInst,HINSTANCE,LPWSTR pArgs,INT )
 {

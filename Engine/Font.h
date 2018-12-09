@@ -4,7 +4,7 @@
 #include <map>
 
 
-class Text
+class Font
 {
 public:
 	class Character
@@ -18,12 +18,12 @@ public:
 		int rightPadding;
 	};
 public:
-	Text();
-	~Text();
+	Font();
+	~Font();
 
-	std::list<Character> StringToTextList(std::string& s);
+	std::list<Character> StringToTextList(std::string s);
 public:
-	std::map<char, Text::Character> charMap;
+	std::map<char, Font::Character> charMap;
 	Surface *fontBitmap = new Surface("Font_bookman_old_style.bmp");
 
 	constexpr static Character START			{ 0,			'\0',	 0,		0 ,		0,	1};

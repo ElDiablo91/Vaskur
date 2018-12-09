@@ -12,7 +12,7 @@ TextBox::TextBox(int x, int y, int width, int height)
 	cursorPos = x;
 	blinker = 0;
 	isSelected = false;
-	input.push_back(Text::START);
+	input.push_back(Font::START);
 	inputPos = input.begin();
 }
 
@@ -27,11 +27,11 @@ void TextBox::Draw(Graphics & gfx)
 	int y0 = y;
 	int y1 = y + height;
 
-	gfx.DrawRect(x0, y0, x1, y1, Colors::White);
-	gfx.DrawLineRect(x0 - 1, y0 - 1, x1 + 1, y1 + 1, Colors::Black);
+	gfx.DrawRect(x0, y0, x1, y1, Colors::White); //background
+	gfx.DrawLineRect(x0 - 1, y0 - 1, x1 + 1, y1 + 1, Colors::Black); //boarder
 
 	int renderPos = x;
-	for each (Text::Character i in input)
+	for each (Font::Character i in input)	//Draw text	
 	{
 		renderPos += i.leftPadding;
 		int yOffset = (i.bitmapPos / FontBOS.fontBitmap->GetWidth()) * 23;
@@ -52,7 +52,7 @@ void TextBox::Draw(Graphics & gfx)
 		renderPos += i.width + i.rightPadding;
 	}
 
-	if (isSelected && blinker > 30)
+	if (isSelected && blinker > 30) //blinking cursor
 	{
 
 		gfx.DrawLineV(cursorPos    , y0 + 3, y1 - 3, Colors::Black);
@@ -111,7 +111,7 @@ void TextBox::StepCursorLeft()
 
 void TextBox::StepCursorRight()
 {
-	std::list<Text::Character>::iterator next = inputPos;
+	std::list<Font::Character>::iterator next = inputPos;
 	next++;
 	if (next != input.end())
 	{
@@ -121,7 +121,7 @@ void TextBox::StepCursorRight()
 
 void TextBox::UpdateCursorPos()
 {
-	std::list<Text::Character>::iterator i;
+	std::list<Font::Character>::iterator i;
 	int temp = 0;
 	for(i = input.begin(); i != inputPos; i++)
 	{
