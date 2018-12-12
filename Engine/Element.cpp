@@ -9,7 +9,8 @@ Element::Element(int x, int y, int width, int height)
 	x(x),
 	y(y),
 	width(width),
-	height(height)
+	height(height),
+	isSelected(false)
 {
 }
 

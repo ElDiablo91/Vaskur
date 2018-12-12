@@ -28,7 +28,8 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	box(100,100,300,24),
 	cBox(100,200,300,24),
-	eList({&box, &cBox})
+	text(100,300,"Kalli litli kónguló, klifraði upp í tré. Fjandin bjáni"),
+	eList({&box, &cBox, &text })
 {
 	std::list<Font::Character> temp = box.FontBOS.StringToTextList("yolo");
 	box.input.insert(++box.inputPos, temp.begin(), temp.end());
@@ -45,42 +46,17 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	//ekki láta element erfa Text???
-	//
-	for each (auto element in eList)
+	std::list<Element*>::iterator selected = eList.end();
+	for(auto element = eList.begin(); element != eList.end(); element++)
 	{
-		
-		if (wnd.mouse.LeftIsPressed())
+		(*element)->Input(wnd);
+		if ((*element)->IsSelected())
 		{
-			element->CheckForCursor(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
-			element->UpdateCursorPos();
-		}
-
-		if (element->IsSelected())
-		{
-			if (!wnd.kbd.CharIsEmpty())
-			{
-				char k = wnd.kbd.ReadChar();
-				element->Input(k);
-
-				std::string x(1, k);
-				OutputDebugStringA(x.c_str());
-
-				element->UpdateCursorPos();
-			}
-			const auto e = wnd.kbd.ReadKey();
-			if (e.GetCode() == VK_LEFT && e.IsPress())
-			{
-				element->StepCursorLeft();
-				element->UpdateCursorPos();
-			}
-			if (e.GetCode() == VK_RIGHT && e.IsPress())
-			{
-				element->StepCursorRight();
-				element->UpdateCursorPos();
-			}
+			selected = element;
 		}
 	}
+	if(selected != eList.end())
+		eList.splice(eList.end(), eList, selected);
 	//ef ekkert er selectað þá hendum við öllu inputti sem 
 	//kemur af lyklaborðinu
 	wnd.kbd.Flush();

@@ -11,7 +11,6 @@ TextBox::TextBox(int x, int y, int width, int height)
 {
 	cursorPos = x;
 	blinker = 0;
-	isSelected = false;
 	input.push_back(Font::START);
 	inputPos = input.begin();
 }
@@ -145,10 +144,22 @@ int TextBox::InputWidth()
 }
 
 
-void TextBox::Input(char keycode)
+void TextBox::Input(MainWindow& wnd)
 {
-	if (isSelected)
+
+	if (!wnd.mouse.LeftIsPressed()) click = true; //only allow clicks, simple 2 frame gate
+
+	if (wnd.mouse.LeftIsPressed() && click)
 	{
+		CheckForCursor(wnd.mouse.GetPosX(), wnd.mouse.GetPosY());
+		UpdateCursorPos();
+
+		if (wnd.mouse.LeftIsPressed()) click = false;
+	}
+	else if (isSelected && !wnd.kbd.CharIsEmpty())
+	{
+		char keycode = wnd.kbd.ReadChar();
+
 		if (keycode == 0x08) //Backspace
 		{
 			if (inputPos->charValue != '\0')
@@ -171,6 +182,18 @@ void TextBox::Input(char keycode)
 				input.erase(inputPos--);
 			}
 		}
+
+		const auto e = wnd.kbd.ReadKey();
+		if (e.GetCode() == VK_LEFT && e.IsPress())
+		{
+			StepCursorLeft();
+		}
+		if (e.GetCode() == VK_RIGHT && e.IsPress())
+		{
+			StepCursorRight();
+		}
+
+		UpdateCursorPos();
 	}
 }
 

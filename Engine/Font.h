@@ -59,11 +59,11 @@ public:
 	constexpr static Character c				{ 667 + 5,		'c',	 0,		12,		0,	0};
 	constexpr static Character d				{ 690 + 4,		'd',	 0,		14,		0,	0};
 	constexpr static Character e				{ 713 + 5,		'e',	 0,		12,		0,	0};
-	constexpr static Character f				{ 736 + 7,		'f',	 0,		10,		0,	0};
+	constexpr static Character f				{ 736 + 7,		'f',	 0,		10,		0,	-2};
 	constexpr static Character g				{ 759 + 6,		'g',	 0,		12,		0,	0};
 	constexpr static Character h				{ 782 + 5,		'h',	 0,		15,		0,	0};
 	constexpr static Character i				{ 805 + 8,		'i',	 0,		7 ,		0,	0};
-	constexpr static Character j				{ 828 + 7,		'j',	 0,		9 ,		0,	0};
+	constexpr static Character j				{ 828 + 7,		'j',	 0,		9 ,		-2,	0};
 	constexpr static Character k				{ 851 + 5,		'k',	 0,		14,		0,	0};
 	constexpr static Character l				{ 874 + 9,		'l',	 0,		8 ,		0,	0};
 	constexpr static Character m				{ 897 + 2,		'm',	 0,		20,		0,	0};
@@ -108,7 +108,7 @@ public:
 	constexpr static Character Y				{ 1794 + 5,		'Y',	 0,		15,		0,	0};
 	constexpr static Character Z				{ 1817 + 5,		'Z',	 0,		14,		0,	0};
 	constexpr static Character TILDE			{ 1840 + 7,		'~',	 0,		11,		0,	0};
-	constexpr static Character á				{ 1863 + 5,		'á',	 0,		14,		0,	0};
+	constexpr static Character á				{ 1863 + 5,		'á',	 0,		14,		0,	-1};
 	constexpr static Character ð				{ 1886 + 5,		'ð',	 0,		12,		0,	0};
 	constexpr static Character é				{ 1909 + 5,		'é',	 0,		12,		0,	0};
 	constexpr static Character í				{ 1932 + 7,		'í',	 0,		8 ,		0,	0};

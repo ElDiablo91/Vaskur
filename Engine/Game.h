@@ -24,6 +24,7 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "ComboBox.h"
+#include "Text.h"
 
 class Game
 {
@@ -47,7 +48,8 @@ private:
 	int letter = 0;
 	TextBox box;
 	ComboBox cBox;
+	Text text;
 
-	std::list<TextBox*> eList;
+	std::list<Element*> eList;
 	/********************************/
 };

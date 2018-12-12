@@ -8,15 +8,17 @@ public:
 	TextBox(int x, int y, int width, int height);
 	~TextBox();
 
-	virtual void Draw(Graphics& gfx) override;
-
-	virtual void Input(char keycode);
+	void Draw(Graphics& gfx) override;
+	void Input(MainWindow& wnd) override;
+	
 	virtual void CheckForCursor(int x, int y);
-	virtual void StepCursorLeft();
-	virtual void StepCursorRight();
-	virtual void UpdateCursorPos();
+
+    void StepCursorLeft();
+    void StepCursorRight();
+    void UpdateCursorPos();
 	int InputWidth();
 
+	bool click = true; //dont want to run mouse checks a million times
 	int cursorPos;
 	int blinker;
 	std::list<Font::Character> input;

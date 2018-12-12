@@ -20,9 +20,9 @@ ComboBox::~ComboBox()
 {
 }
 
-void ComboBox::Input(char keycode)
+void ComboBox::Input(MainWindow& wnd)
 {
-	TextBox::Input(keycode);
+	TextBox::Input(wnd);
 }
 
 void ComboBox::Draw(Graphics & gfx)
@@ -57,7 +57,15 @@ void ComboBox::CheckForCursor(int mx, int my)
 
 	if (my > arrowDownY && my < y1 && mx > arrowDownX && mx < x1)
 	{
-		isDropDown = true;
+		if (isDropDown)
+		{
+			isDropDown = false;
+		}
+		else
+		{
+			isDropDown = true;
+		}
+		isSelected = true;
 	}
 	else
 	{
