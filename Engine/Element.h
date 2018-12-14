@@ -3,7 +3,6 @@
 #include "Graphics.h"
 #include "MainWindow.h"
 
-
 class Element
 {
 public:
@@ -11,12 +10,10 @@ public:
 	Element(int x, int y, int width, int height);
 	~Element();
 
-
 	virtual void Draw(Graphics& gfx) {};
 	virtual void Input(MainWindow& wnd) {};
 
 	bool IsSelected() { return isSelected; }
-
 
 	static Font FontBOS;
 protected:

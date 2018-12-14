@@ -34,6 +34,10 @@ Game::Game( MainWindow& wnd )
 	std::list<Font::Character> temp = box.FontBOS.StringToTextList("yolo");
 	box.input.insert(++box.inputPos, temp.begin(), temp.end());
 	box.inputPos--;
+	cBox.AddToList(box.FontBOS.StringToTextList("mooooo"));
+	cBox.AddToList(box.FontBOS.StringToTextList("vofff"));
+	cBox.AddToList(box.FontBOS.StringToTextList("mjaaaa"));
+	cBox.AddToList(box.FontBOS.StringToTextList("haaaa"));
 }
 
 void Game::Go()
